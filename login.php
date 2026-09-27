@@ -216,6 +216,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       position: relative;
       display: flex;
       align-items: center;
+      padding-right: 2px;
+      overflow: hidden;
       border: 1.5px solid #e2e8f0;
       border-radius: 12px;
       background: #ffffff;
@@ -228,6 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .field-icon-left {
+      flex: 0 0 44px;
       width: 44px;
       text-align: center;
       color: #94a3b8;
@@ -235,6 +238,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .field-box .form-control {
+      flex: 1 1 0%;
+      width: 0;
+      min-width: 0;
       border: none;
       box-shadow: none;
       font-size: 0.92rem;
@@ -247,6 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .btn-toggle-eye {
+      flex: 0 0 auto;
       border: none;
       background: transparent;
       padding: 0.5rem 0.85rem;
@@ -405,22 +412,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <i class="bi bi-arrow-right"></i>
           </button>
         </form>
-
-        <!-- Akun Uji Coba Kredensial -->
-        <div class="credentials-card">
-          <div class="small fw-bold text-secondary mb-2 d-flex align-items-center gap-1">
-            <i class="bi bi-info-circle-fill text-primary"></i>
-            <span>Akun Login Pengujian</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mb-1">
-            <small class="text-secondary">Administrator:</small>
-            <span class="credential-chip">admin / admin123</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <small class="text-secondary">Peserta Siswa:</small>
-            <span class="credential-chip">siswa01 / siswa123</span>
-          </div>
-        </div>
 
       </div>
     </section>
