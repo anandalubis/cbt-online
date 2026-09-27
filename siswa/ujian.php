@@ -73,7 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_ujian'])) {
 
 // Ambil Daftar Soal
 $soal_list = mysqli_query($koneksi, "SELECT * FROM questions WHERE exam_id = $exam_id ORDER BY id ASC");
-$total_soal_tampil = mysqli_num_rows($soal_list);
+$daftar_soal = [];
+while ($soal = mysqli_fetch_assoc($soal_list)) {
+  $daftar_soal[] = $soal;
+}
+$total_soal_tampil = count($daftar_soal);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -147,6 +151,232 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
       margin-bottom: 1.5rem;
       padding: 1.85rem 2rem;
       transition: border-color 0.2s ease;
+      display: none;
+      scroll-margin-top: 8rem;
+    }
+
+    .exam-question-card.is-active {
+      display: block;
+      animation: question-enter 0.24s ease both;
+    }
+
+    @keyframes question-enter {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .question-progress-panel {
+      padding: 1.25rem 1.4rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.25rem;
+      background: #ffffff;
+      box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.1);
+    }
+
+    .question-navigator {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .question-nav-button {
+      position: relative;
+      min-width: 42px;
+      min-height: 42px;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 0.84rem;
+      font-weight: 800;
+      transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .question-nav-button:hover {
+      transform: translateY(-2px);
+      border-color: #93c5fd;
+    }
+
+    .question-nav-button.is-current {
+      outline: 3px solid rgba(37, 99, 235, 0.2);
+      outline-offset: 1px;
+    }
+
+    .question-nav-button.is-answered {
+      border-color: #86efac;
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .question-nav-button.is-doubtful {
+      border-color: #fcd34d;
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .question-status-dot {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+      display: none;
+    }
+
+    .question-nav-button.is-doubtful .question-status-dot {
+      display: block;
+    }
+
+    .question-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.1rem;
+      color: #64748b;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .question-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .legend-dot.answered {
+      background: #22c55e;
+    }
+
+    .legend-dot.doubtful {
+      background: #f59e0b;
+    }
+
+    .question-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+    }
+
+    .doubtful-button {
+      border: 1px solid #fcd34d;
+      background: #fffbeb;
+      color: #a16207;
+      font-weight: 700;
+    }
+
+    .doubtful-button:hover,
+    .doubtful-button.is-marked {
+      border-color: #f59e0b;
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .question-state-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 575.98px) {
+      .exam-question-card {
+        padding: 1.25rem 1rem;
+      }
+
+      .question-progress-panel {
+        padding: 1rem;
+      }
+
+      .question-controls {
+        flex-wrap: wrap;
+      }
+
+      .question-controls .btn {
+        flex: 1 1 auto;
+      }
+
+      .doubtful-button {
+        order: 3;
+        width: 100%;
+      }
+
+      .question-navigator {
+        grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+        gap: 0.4rem;
+      }
+    }
+
+    html[data-theme="dark"] .question-progress-panel {
+      background: var(--theme-surface);
+      border-color: var(--theme-border);
+      box-shadow: var(--theme-shadow);
+    }
+
+    html[data-theme="dark"] .question-nav-button {
+      background: var(--theme-surface-soft);
+      border-color: var(--theme-border-strong);
+      color: var(--theme-text-secondary);
+    }
+
+    html[data-theme="dark"] .question-nav-button.is-answered {
+      background: rgba(34, 197, 94, 0.16);
+      border-color: rgba(74, 222, 128, 0.5);
+      color: #86efac;
+    }
+
+    html[data-theme="dark"] .question-nav-button.is-doubtful,
+    html[data-theme="dark"] .doubtful-button,
+    html[data-theme="dark"] .doubtful-button.is-marked {
+      background: rgba(245, 158, 11, 0.14);
+      border-color: rgba(251, 191, 36, 0.48);
+      color: #fcd34d;
+    }
+
+    html[data-theme="dark"] .option-radio-card {
+      background-color: var(--theme-surface-soft);
+      border-color: var(--theme-border);
+    }
+
+    html[data-theme="dark"] .option-badge-letter {
+      background: var(--theme-surface-muted);
+      border-color: var(--theme-border);
+      color: var(--theme-text-secondary);
+    }
+
+    html[data-theme="dark"] .option-text-label,
+    html[data-theme="dark"] .question-title {
+      color: var(--theme-text) !important;
+    }
+
+    html[data-theme="dark"] .option-radio-card.selected-active {
+      background: rgba(37, 99, 235, 0.18);
+      border-color: #60a5fa;
+    }
+
+    html[data-theme="dark"] .option-radio-card.selected-active .option-text-label {
+      color: #bfdbfe !important;
+    }
+
+    html[data-theme="dark"] .question-controls {
+      border-color: var(--theme-border);
     }
 
     .question-title {
@@ -267,17 +497,46 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
 
       <div class="row justify-content-center">
         <div class="col-lg-10 col-xl-9">
-          <?php
-          $no = 1;
-          while ($s = mysqli_fetch_assoc($soal_list)):
-          ?>
-            <div class="exam-question-card" id="soal-block-<?= $s['id'] ?>">
+          <section class="question-progress-panel mb-4" aria-label="Navigasi dan status soal">
+            <div class="d-flex flex-wrap align-items-start justify-content-between gap-3">
+              <div>
+                <h6 class="fw-bold mb-1">Navigasi soal</h6>
+                <p class="text-secondary small mb-0">Pilih nomor untuk berpindah. Soal ragu-ragu bisa ditinjau kembali kapan saja.</p>
+              </div>
+              <button type="button" class="btn btn-success rounded-3 px-3 py-2 fw-bold d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalKonfirmasiSelesai">
+                <i class="bi bi-check2-circle"></i><span>Selesaikan ujian</span>
+              </button>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-3 mb-2">
+              <div class="question-legend" aria-label="Keterangan status soal">
+                <span><i class="legend-dot"></i>Belum dijawab</span>
+                <span><i class="legend-dot answered"></i>Sudah dijawab</span>
+                <span><i class="legend-dot doubtful"></i>Ragu-ragu</span>
+              </div>
+              <small class="fw-bold text-secondary"><span id="answeredCount">0</span> / <?= $total_soal_tampil ?> dijawab</small>
+            </div>
+            <div class="progress rounded-pill" style="height: 6px;" role="progressbar" aria-label="Progres jawaban">
+              <div id="answerProgress" class="progress-bar bg-success rounded-pill" style="width: 0%; transition: width 0.25s ease;"></div>
+            </div>
+
+            <div class="question-navigator" id="questionNavigator" aria-label="Pilih nomor soal">
+              <?php foreach ($daftar_soal as $index => $s): ?>
+                <button type="button" class="question-nav-button" data-question-target="<?= $index ?>" aria-label="Buka soal nomor <?= $index + 1 ?>">
+                  <?= $index + 1 ?><span class="question-status-dot" aria-hidden="true"></span>
+                </button>
+              <?php endforeach; ?>
+            </div>
+          </section>
+
+          <?php foreach ($daftar_soal as $index => $s): ?>
+            <div class="exam-question-card<?= $index === 0 ? ' is-active' : '' ?>" id="soal-block-<?= (int)$s['id'] ?>" data-question-index="<?= $index ?>">
               <!-- Nomor Soal Pill -->
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-bold">
-                  <i class="bi bi-question-circle-fill me-1"></i> Soal Nomor <?= $no++ ?>
+                  <i class="bi bi-question-circle-fill me-1"></i> Soal Nomor <?= $index + 1 ?> dari <?= $total_soal_tampil ?>
                 </span>
-                <span class="text-secondary small">Pilihan Ganda</span>
+                <span class="question-state-badge text-secondary" data-question-state>Belum dijawab</span>
               </div>
 
               <!-- Teks Pertanyaan -->
@@ -320,11 +579,24 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
                   <span class="option-text-label"><?= htmlspecialchars($s['opsi_e']) ?></span>
                 </label>
               </div>
+
+              <div class="question-controls">
+                <button type="button" class="btn btn-outline-secondary rounded-3 px-3" data-question-previous>
+                  <i class="bi bi-arrow-left me-1"></i><span>Sebelumnya</span>
+                </button>
+                <button type="button" class="btn doubtful-button rounded-3 px-3" data-toggle-doubt>
+                  <i class="bi bi-flag me-1"></i><span>Ragu-ragu &amp; Berikutnya</span>
+                </button>
+                <button type="button" class="btn btn-primary rounded-3 px-3 fw-semibold" data-question-next>
+                  <span>Berikutnya</span><i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
             </div>
-          <?php endwhile; ?>
+          <?php endforeach; ?>
 
           <!-- Tombol Selesaikan Ujian -->
-          <div class="text-end mt-4 mb-5 pb-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4 mb-5 pb-4">
+            <small class="text-secondary">Pastikan semua jawaban dan tanda ragu-ragu sudah diperiksa.</small>
             <button type="button" class="btn btn-success btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalKonfirmasiSelesai">
               <i class="bi bi-check2-circle fs-4"></i>
               <span>Selesaikan & Kumpulkan</span>
@@ -346,9 +618,10 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
           </div>
 
           <h5 class="fw-bold text-dark mb-1" id="modalSelesaiLabel" style="letter-spacing: -0.02em;">Selesaikan Ujian?</h5>
-          <p class="text-secondary small mb-4" style="line-height: 1.55;">
-            Apakah Anda yakin ingin mengumpulkan seluruh lembar jawaban? Setelah dikonfirmasi, jawaban akan dinilai secara otomatis dan tidak dapat diubah kembali.
+          <p class="text-secondary small mb-2" style="line-height: 1.55;">
+            Setelah dikumpulkan, jawaban akan dinilai otomatis dan tidak dapat diubah kembali.
           </p>
+          <p id="finishSummary" class="small fw-semibold text-secondary mb-4" aria-live="polite"></p>
 
           <div class="d-flex gap-2">
             <button type="button" class="btn btn-light rounded-3 w-50 py-2 fw-semibold text-secondary border" data-bs-dismiss="modal">
@@ -369,6 +642,10 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
     let sisaDetik = <?= (int)$sisa_detik ?>;
     const timerEl = document.getElementById('countdown');
     const formUjian = document.getElementById('formUjian');
+    const questionCards = Array.from(document.querySelectorAll('.exam-question-card'));
+    const questionNavButtons = Array.from(document.querySelectorAll('[data-question-target]'));
+    const doubtfulQuestions = [];
+    let activeQuestionIndex = 0;
 
     function formatWaktu(totalDetik) {
       let jam = Math.floor(totalDetik / 3600);
@@ -396,6 +673,84 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
       }
     }, 1000);
 
+    function getQuestionStatus(card, index) {
+      const isAnswered = Boolean(card.querySelector('input[type="radio"]:checked'));
+      if (doubtfulQuestions[index]) return 'doubtful';
+      return isAnswered ? 'answered' : 'unanswered';
+    }
+
+    function updateQuestionStatuses() {
+      let answered = 0;
+      let doubtful = 0;
+      let unanswered = 0;
+
+      questionCards.forEach((card, index) => {
+        const status = getQuestionStatus(card, index);
+        const navButton = questionNavButtons[index];
+        const stateLabel = card.querySelector('[data-question-state]');
+        const doubtButton = card.querySelector('[data-toggle-doubt]');
+        const previousButton = card.querySelector('[data-question-previous]');
+        const nextButton = card.querySelector('[data-question-next]');
+        const hasAnswer = Boolean(card.querySelector('input[type="radio"]:checked'));
+
+        if (hasAnswer) answered++;
+        if (doubtfulQuestions[index]) doubtful++;
+        if (!hasAnswer) unanswered++;
+
+        navButton.classList.remove('is-answered', 'is-doubtful', 'is-current');
+        if (status !== 'unanswered') navButton.classList.add(`is-${status}`);
+        if (index === activeQuestionIndex) {
+          navButton.classList.add('is-current');
+          navButton.setAttribute('aria-current', 'step');
+        } else {
+          navButton.removeAttribute('aria-current');
+        }
+        navButton.setAttribute('aria-label', `Soal nomor ${index + 1}, ${status === 'doubtful' ? 'ragu-ragu' : status === 'answered' ? 'sudah dijawab' : 'belum dijawab'}`);
+
+        stateLabel.textContent = status === 'doubtful' ? 'Ditandai ragu-ragu' : status === 'answered' ? 'Sudah dijawab' : 'Belum dijawab';
+        stateLabel.className = `question-state-badge ${status === 'doubtful' ? 'text-warning-emphasis' : status === 'answered' ? 'text-success' : 'text-secondary'}`;
+        doubtButton.classList.toggle('is-marked', Boolean(doubtfulQuestions[index]));
+        doubtButton.querySelector('span').textContent = doubtfulQuestions[index] ? 'Hapus tanda ragu' : 'Ragu-ragu & Berikutnya';
+        doubtButton.setAttribute('aria-pressed', doubtfulQuestions[index] ? 'true' : 'false');
+        previousButton.disabled = index === 0;
+        nextButton.disabled = index === questionCards.length - 1;
+      });
+
+      document.getElementById('answeredCount').textContent = answered;
+      document.getElementById('answerProgress').style.width = `${questionCards.length ? (answered / questionCards.length) * 100 : 0}%`;
+      document.getElementById('finishSummary').textContent = `${answered} dijawab · ${doubtful} ragu-ragu · ${unanswered} belum dijawab`;
+    }
+
+    function showQuestion(index, shouldScroll = true) {
+      if (!questionCards.length) return;
+      activeQuestionIndex = Math.max(0, Math.min(index, questionCards.length - 1));
+      questionCards.forEach((card, cardIndex) => card.classList.toggle('is-active', cardIndex === activeQuestionIndex));
+      updateQuestionStatuses();
+      if (shouldScroll) questionCards[activeQuestionIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    questionNavButtons.forEach(button => {
+      button.addEventListener('click', () => showQuestion(Number(button.dataset.questionTarget)));
+    });
+
+    questionCards.forEach((card, index) => {
+      card.querySelector('[data-question-previous]').addEventListener('click', () => showQuestion(index - 1));
+      card.querySelector('[data-question-next]').addEventListener('click', () => showQuestion(index + 1));
+      card.querySelector('[data-toggle-doubt]').addEventListener('click', () => {
+        if (doubtfulQuestions[index]) {
+          doubtfulQuestions[index] = false;
+          updateQuestionStatuses();
+        } else {
+          doubtfulQuestions[index] = true;
+          updateQuestionStatuses();
+          if (index < questionCards.length - 1) showQuestion(index + 1);
+        }
+      });
+    });
+
     // Highlight aktif pada kartu opsi yang dipilih
     document.querySelectorAll('.option-radio-card input[type="radio"]').forEach(radio => {
       radio.addEventListener('change', function() {
@@ -404,8 +759,11 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
         if (this.checked) {
           this.closest('.option-radio-card').classList.add('selected-active');
         }
+        updateQuestionStatuses();
       });
     });
+
+    showQuestion(0, false);
 
     document.getElementById('btnSubmitConfirmed').addEventListener('click', () => formUjian.submit());
   </script>
