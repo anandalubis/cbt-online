@@ -191,7 +191,7 @@ $total_rows = mysqli_num_rows($list_siswa);
     }
   </style>
   <link rel="stylesheet" href="../assets/css/admin-responsive.css?v=3">
-  <link rel="stylesheet" href="../assets/css/theme.css?v=1">
+  <link rel="stylesheet" href="../assets/css/theme.css?v=3">
 </head>
 
 <body>

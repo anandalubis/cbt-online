@@ -288,6 +288,79 @@ html[data-theme="dark"] .modal-footer {
   border-color: var(--theme-border) !important;
 }
 
+html[data-theme="dark"] #modalHapusSiswa .modal-content {
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 1.35rem !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.08), transparent 38%),
+    #141e2e !important;
+  color: var(--theme-text);
+}
+
+html[data-theme="dark"] #modalHapusSiswaLabel {
+  color: #f1f5f9 !important;
+}
+
+html[data-theme="dark"] .delete-student-icon,
+html[data-theme="dark"] #modalHapusSiswa .modal-body > .mb-3.mx-auto {
+  width: 74px;
+  height: 74px;
+  border: 2px solid rgba(248, 113, 113, 0.35);
+  background: rgba(239, 68, 68, 0.14);
+  color: #f87171;
+  box-shadow: 0 0 28px rgba(239, 68, 68, 0.12);
+}
+
+html[data-theme="dark"] .delete-student-preview,
+html[data-theme="dark"]
+  #modalHapusSiswa
+  .modal-body
+  > .p-3.rounded-3.border.text-start {
+  border-color: var(--theme-border) !important;
+  background: #1a2739 !important;
+}
+
+html[data-theme="dark"] .delete-student-preview .text-dark,
+html[data-theme="dark"]
+  #modalHapusSiswa
+  .modal-body
+  > .p-3.rounded-3.border.text-start
+  .text-dark {
+  color: #e7edf7 !important;
+}
+
+html[data-theme="dark"] .delete-student-username,
+html[data-theme="dark"] #modalHapusSiswa #teksUsernameSiswa {
+  display: inline-block;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid #3a4b62;
+  border-radius: 7px;
+  background: #26364b !important;
+  color: #dbeafe !important;
+}
+
+html[data-theme="dark"] .delete-student-warning,
+html[data-theme="dark"]
+  #modalHapusSiswa
+  .modal-body
+  > .p-2.rounded-3.text-start.mb-4 {
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  background: rgba(127, 29, 29, 0.2) !important;
+}
+
+html[data-theme="dark"] .delete-student-warning .text-danger,
+html[data-theme="dark"]
+  #modalHapusSiswa
+  .modal-body
+  > .p-2.rounded-3.text-start.mb-4
+  .text-danger {
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] #modalHapusSiswa .btn-light {
+  color: #d5deea;
+}
+
 html[data-theme="dark"] .main-card,
 html[data-theme="dark"] .rekap-card,
 html[data-theme="dark"] .question-card,
