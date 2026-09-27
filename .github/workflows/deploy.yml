@@ -1,0 +1,26 @@
+name: Auto Deploy to Hosting
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  web-deploy:
+    name: Deploy to InfinityFree
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil Kode Terbaru
+        uses: actions/checkout@v4
+
+      - name: Sinkronisasi ke Hosting via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: htdocs/   # Otomatis langsung masuk ke folder htdocs
+          exclude: |
+            **/.git*
+            **/.github*
+            **/config/database.php
