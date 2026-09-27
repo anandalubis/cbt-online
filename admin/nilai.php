@@ -55,6 +55,15 @@ if ($exam_id > 0) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('cbt-portal-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', document.documentElement.dataset.theme)
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.setAttribute('data-bs-theme', 'light')
+    }
+  </script>
   <title>Rekap Nilai - CBT Portal</title>
   <!-- Fonts & Bootstrap 5 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -218,6 +227,7 @@ if ($exam_id > 0) {
     }
   </style>
   <link rel="stylesheet" href="../assets/css/admin-responsive.css?v=3">
+  <link rel="stylesheet" href="../assets/css/theme.css?v=1">
 </head>
 
 <body>
@@ -401,6 +411,7 @@ if ($exam_id > 0) {
   <?php include 'modal/modal_logout.php'; ?>
   <script src="../assets/js/admin-mobile-select.js?v=2"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/theme-toggle.js?v=1"></script>
 </body>
 
 </html>

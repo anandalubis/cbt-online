@@ -1,0 +1,480 @@
+/* Shared CBT Portal theme tokens and accessible theme controls. */
+:root,
+html[data-theme="light"] {
+  color-scheme: light;
+  --theme-page: #f4f7fb;
+  --theme-surface: #ffffff;
+  --theme-surface-soft: #f8fafc;
+  --theme-surface-muted: #f1f5f9;
+  --theme-border: #e2e8f0;
+  --theme-border-strong: #cbd5e1;
+  --theme-text: #172033;
+  --theme-text-secondary: #526078;
+  --theme-text-muted: #718096;
+  --theme-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --theme-page: #0b1220;
+  --theme-surface: #141e2e;
+  --theme-surface-soft: #192638;
+  --theme-surface-muted: #202e42;
+  --theme-border: #29384c;
+  --theme-border-strong: #3a4b62;
+  --theme-text: #e7edf7;
+  --theme-text-secondary: #b5c1d2;
+  --theme-text-muted: #91a0b4;
+  --theme-shadow: 0 16px 38px rgba(0, 0, 0, 0.22);
+}
+
+html {
+  background: var(--theme-page);
+  transition: background-color 0.22s ease;
+}
+
+body {
+  background-color: var(--theme-page) !important;
+  color: var(--theme-text);
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
+
+html[data-theme="light"] body.student-page {
+  background-image: none !important;
+  color: var(--theme-text) !important;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 40px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--theme-border-strong);
+  border-radius: 12px;
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: #60a5fa;
+  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.12);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.42);
+  outline-offset: 2px;
+}
+
+.theme-toggle i {
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+.theme-toggle-compact {
+  width: 42px;
+  min-width: 42px;
+  padding: 0;
+  border-radius: 12px;
+}
+
+.theme-toggle-compact i {
+  font-size: 1.1rem;
+}
+
+.theme-toggle-float {
+  position: fixed;
+  z-index: 1040;
+  top: 1rem;
+  right: 1rem;
+}
+
+.theme-toggle-on-dark {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.76);
+  color: #f8fafc;
+  backdrop-filter: blur(12px);
+}
+
+.theme-toggle-on-dark:hover {
+  background: rgba(30, 41, 59, 0.95);
+  color: #fff;
+}
+
+/* Refined light surfaces; retain the existing clean, bright visual language. */
+.admin-page-titlebar,
+.student-navbar,
+.admin-mobile-header,
+.exam-card-modern,
+.stat-card-modern,
+.action-step-card,
+.main-card,
+.rekap-card,
+.question-card,
+.mini-stat-box,
+.confirm-card,
+.result-card,
+.exam-question-card {
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .student-page {
+  background-color: var(--theme-page) !important;
+  color: var(--theme-text);
+}
+
+html[data-theme="dark"] .admin-page-titlebar {
+  border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .admin-page-titlebar h1,
+html[data-theme="dark"] .admin-page-titlebar h2,
+html[data-theme="dark"] .admin-page-titlebar h3,
+html[data-theme="dark"] .admin-page-titlebar h4,
+html[data-theme="dark"] .admin-page-titlebar h5,
+html[data-theme="dark"] .admin-page-titlebar h6,
+html[data-theme="dark"] .student-page h1,
+html[data-theme="dark"] .student-page h2,
+html[data-theme="dark"] .student-page h3,
+html[data-theme="dark"] .student-page h4,
+html[data-theme="dark"] .student-page h5,
+html[data-theme="dark"] .student-page h6,
+html[data-theme="dark"] .content-area h1,
+html[data-theme="dark"] .content-area h2,
+html[data-theme="dark"] .content-area h3,
+html[data-theme="dark"] .content-area h4,
+html[data-theme="dark"] .content-area h5,
+html[data-theme="dark"] .content-area h6 {
+  color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .text-dark:not(.btn),
+html[data-theme="dark"] .content-area .text-body,
+html[data-theme="dark"] .student-page .text-body {
+  color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .text-secondary {
+  color: var(--theme-text-secondary) !important;
+}
+
+html[data-theme="dark"] .text-muted {
+  color: var(--theme-text-muted) !important;
+}
+
+html[data-theme="dark"]
+  .bg-white:not(.bg-opacity-10):not(.bg-opacity-25):not(.bg-opacity-50):not(
+    .bg-opacity-75
+  ),
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .main-card,
+html[data-theme="dark"] .rekap-card,
+html[data-theme="dark"] .question-card,
+html[data-theme="dark"] .stat-card-modern,
+html[data-theme="dark"] .action-step-card,
+html[data-theme="dark"] .exam-card-modern,
+html[data-theme="dark"] .mini-stat-box,
+html[data-theme="dark"] .confirm-card,
+html[data-theme="dark"] .result-card,
+html[data-theme="dark"] .exam-question-card,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .dropdown-menu {
+  background-color: var(--theme-surface) !important;
+  color: var(--theme-text);
+  border-color: var(--theme-border) !important;
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme="dark"] .bg-light,
+html[data-theme="dark"] .score-box-result,
+html[data-theme="dark"] .score-banner-box,
+html[data-theme="dark"] .info-summary-box,
+html[data-theme="dark"] .option-card,
+html[data-theme="dark"] .option-input-addon,
+html[data-theme="dark"] .token-badge,
+html[data-theme="dark"] .nisn-pill {
+  background-color: var(--theme-surface-soft) !important;
+  color: var(--theme-text-secondary) !important;
+  border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .table {
+  --bs-table-color: var(--theme-text-secondary);
+  --bs-table-bg: var(--theme-surface);
+  --bs-table-border-color: var(--theme-border);
+  --bs-table-striped-bg: var(--theme-surface-soft);
+  --bs-table-striped-color: var(--theme-text);
+  --bs-table-hover-bg: var(--theme-surface-soft);
+  --bs-table-hover-color: var(--theme-text);
+  color: var(--theme-text-secondary);
+  border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .table thead th {
+  background-color: var(--theme-surface-soft) !important;
+  color: #aebbd0 !important;
+  border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .table td,
+html[data-theme="dark"] .table th,
+html[data-theme="dark"] .border,
+html[data-theme="dark"] .border-top,
+html[data-theme="dark"] .border-bottom,
+html[data-theme="dark"] .border-light-subtle {
+  border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .form-select,
+html[data-theme="dark"] .input-group-text,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: #101a29;
+  color: var(--theme-text);
+  border-color: var(--theme-border-strong);
+}
+
+html[data-theme="dark"] .form-control::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: #8291a6;
+}
+
+html[data-theme="dark"] .form-control:focus,
+html[data-theme="dark"] .form-select:focus,
+html[data-theme="dark"] textarea:focus {
+  background-color: #101a29;
+  color: var(--theme-text);
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 0.22rem rgba(59, 130, 246, 0.2);
+}
+
+html[data-theme="dark"] .btn-light {
+  --bs-btn-color: var(--theme-text);
+  --bs-btn-bg: var(--theme-surface-muted);
+  --bs-btn-border-color: var(--theme-border-strong);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #33445c;
+  --bs-btn-hover-border-color: #4a5d77;
+}
+
+html[data-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+html[data-theme="dark"] .modal-header,
+html[data-theme="dark"] .modal-footer {
+  border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .main-card,
+html[data-theme="dark"] .rekap-card,
+html[data-theme="dark"] .question-card,
+html[data-theme="dark"] .exam-card-modern,
+html[data-theme="dark"] .stat-card-modern,
+html[data-theme="dark"] .action-step-card,
+html[data-theme="dark"] .mini-stat-box,
+html[data-theme="dark"] .confirm-card,
+html[data-theme="dark"] .result-card,
+html[data-theme="dark"] .exam-question-card {
+  border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .exam-icon-box,
+html[data-theme="dark"] .exam-icon-circle,
+html[data-theme="dark"] .user-avatar-initial,
+html[data-theme="dark"] .confirm-badge-icon {
+  background: rgba(59, 130, 246, 0.16) !important;
+  color: #8bbcff !important;
+  border-color: rgba(96, 165, 250, 0.28) !important;
+}
+
+html[data-theme="dark"] .option-letter {
+  background: #29384c;
+  color: #d5deea;
+}
+
+html[data-theme="dark"] .option-card.correct {
+  background: rgba(22, 163, 74, 0.13) !important;
+  border-color: rgba(74, 222, 128, 0.35) !important;
+  color: #bbf7d0 !important;
+}
+
+html[data-theme="dark"] .option-radio-card {
+  background: var(--theme-surface-soft);
+  border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .option-radio-card:hover {
+  background: #202f43;
+  border-color: #526780;
+}
+
+html[data-theme="dark"] .option-badge-letter {
+  background: #253449;
+  color: #c7d2e2;
+  border-color: var(--theme-border-strong);
+}
+
+html[data-theme="dark"] .option-text-label,
+html[data-theme="dark"] .question-title {
+  color: var(--theme-text-secondary);
+}
+
+html[data-theme="dark"] .option-radio-card.selected-active {
+  background: rgba(37, 99, 235, 0.18);
+  border-color: #60a5fa;
+}
+
+html[data-theme="dark"] .option-radio-card.selected-active .option-text-label {
+  color: #cfe2ff;
+}
+
+html[data-theme="dark"] .token-input-modern {
+  background: #101a29;
+  color: var(--theme-text);
+  border-color: var(--theme-border-strong);
+}
+
+html[data-theme="dark"] .token-input-modern:focus {
+  background: #101a29;
+}
+
+html[data-theme="dark"] .student-hero,
+html[data-theme="dark"] .dashboard-hero,
+html[data-theme="dark"] .timer-container {
+  border-color: rgba(148, 163, 184, 0.2);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] .student-navbar {
+  background: rgba(8, 14, 25, 0.94);
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+html[data-theme="dark"] .rank-2,
+html[data-theme="dark"] .rank-general {
+  background: var(--theme-surface-muted);
+  color: #c1cddd;
+  border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .rank-1,
+html[data-theme="dark"] .rank-3,
+html[data-theme="dark"] .score-pass,
+html[data-theme="dark"] .score-fail,
+html[data-theme="dark"] .badge-status-kkm {
+  filter: brightness(0.86) saturate(0.92);
+}
+
+html[data-theme="dark"]
+  .option-radio-card
+  input[type="radio"]:focus-visible
+  + .option-badge-letter {
+  outline: 3px solid rgba(96, 165, 250, 0.65);
+  outline-offset: 3px;
+}
+
+html[data-theme="dark"] .admin-mobile-header {
+  background: rgba(13, 21, 34, 0.92);
+  border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .admin-menu-toggle,
+html[data-theme="dark"] .mobile-select-trigger,
+html[data-theme="dark"] .mobile-select-menu {
+  background: var(--theme-surface) !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border-strong) !important;
+}
+
+html[data-theme="dark"] .admin-mobile-brand strong {
+  color: var(--theme-text);
+  background: none;
+  -webkit-text-fill-color: var(--theme-text);
+}
+
+html[data-theme="dark"] .admin-mobile-brand small,
+html[data-theme="dark"] .admin-page-titlebar p {
+  color: var(--theme-text-muted) !important;
+}
+
+html[data-theme="light"] .admin-mobile-brand strong {
+  background: none;
+  color: #0f172a;
+  -webkit-text-fill-color: #0f172a;
+}
+
+html[data-theme="dark"] .mobile-select-option {
+  color: var(--theme-text-secondary);
+}
+
+html[data-theme="dark"] .mobile-select-option:hover,
+html[data-theme="dark"] .mobile-select-option.selected {
+  background: rgba(37, 99, 235, 0.2);
+  color: #bfdbfe;
+}
+
+/* Keep controls legible inside the intentionally deep-blue navigation shell. */
+.admin-sidebar .theme-toggle,
+.admin-drawer .theme-toggle {
+  width: 100%;
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
+  border-color: rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.07);
+  color: #e2e8f0;
+  box-shadow: none;
+}
+
+.admin-sidebar .theme-toggle:hover,
+.admin-drawer .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.admin-sidebar .theme-toggle i,
+.admin-drawer .theme-toggle i {
+  color: #93c5fd;
+}
+
+@media (max-width: 575.98px) {
+  .theme-toggle-float {
+    top: 0.7rem;
+    right: 0.7rem;
+  }
+
+  .theme-toggle-float.theme-toggle-compact {
+    top: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -33,6 +33,15 @@ $total_tersedia = mysqli_num_rows($query_ujian);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('cbt-portal-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', document.documentElement.dataset.theme)
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.setAttribute('data-bs-theme', 'light')
+    }
+  </script>
   <title>Portal Evaluasi Siswa - CBT Portal</title>
   <!-- Fonts & Bootstrap 5 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,9 +159,10 @@ $total_tersedia = mysqli_num_rows($query_ujian);
       color: #16a34a;
     }
   </style>
+  <link rel="stylesheet" href="../assets/css/theme.css?v=1">
 </head>
 
-<body>
+<body class="student-page">
 
   <!-- Top Navbar Siswa -->
   <header class="student-navbar py-2 px-3 mb-4 shadow-sm">
@@ -168,6 +178,9 @@ $total_tersedia = mysqli_num_rows($query_ujian);
       </a>
 
       <div class="d-flex align-items-center gap-3">
+        <button type="button" class="theme-toggle theme-toggle-compact" data-theme-toggle aria-label="Beralih tema" title="Beralih tema">
+          <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+        </button>
         <div class="d-none d-sm-flex align-items-center gap-2">
           <div class="user-pill-avatar"><?= htmlspecialchars($inisial_siswa) ?></div>
           <div class="text-start">
@@ -270,12 +283,12 @@ $total_tersedia = mysqli_num_rows($query_ujian);
                     <div class="score-grade"><?= $u['total_nilai'] ?></div>
                   </div>
                 <?php elseif ($inProgress): ?>
-                  <a href="konfirmasi.php?exam_id=<?= $u['id'] ?>" class="btn btn-warning w-100 rounded-3 fw-bold text-dark shadow-sm py-2 d-flex align-items-center justify-content-center gap-2">
+                  <a href="petunjuk.php?exam_id=<?= (int)$u['id'] ?>" class="btn btn-warning w-100 rounded-3 fw-bold text-dark shadow-sm py-2 d-flex align-items-center justify-content-center gap-2">
                     <span>Lanjutkan Ujian</span>
                     <i class="bi bi-arrow-right"></i>
                   </a>
                 <?php else: ?>
-                  <a href="konfirmasi.php?exam_id=<?= $u['id'] ?>" class="btn btn-primary w-100 rounded-3 fw-semibold shadow-sm py-2 d-flex align-items-center justify-content-center gap-2">
+                  <a href="petunjuk.php?exam_id=<?= (int)$u['id'] ?>" class="btn btn-primary w-100 rounded-3 fw-semibold shadow-sm py-2 d-flex align-items-center justify-content-center gap-2">
                     <span>Mulai Ujian</span>
                     <i class="bi bi-arrow-right"></i>
                   </a>
@@ -301,6 +314,7 @@ $total_tersedia = mysqli_num_rows($query_ujian);
   <?php include 'modal/modal_logout.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/theme-toggle.js?v=1"></script>
 </body>
 
 </html>

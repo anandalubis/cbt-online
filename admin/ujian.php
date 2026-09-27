@@ -41,6 +41,15 @@ $total_rows = mysqli_num_rows($list_ujian);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('cbt-portal-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', document.documentElement.dataset.theme)
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.setAttribute('data-bs-theme', 'light')
+    }
+  </script>
   <title>Paket Ujian - CBT Portal</title>
   <!-- Fonts & Bootstrap 5 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -156,6 +165,7 @@ $total_rows = mysqli_num_rows($list_ujian);
     }
   </style>
   <link rel="stylesheet" href="../assets/css/admin-responsive.css?v=3">
+  <link rel="stylesheet" href="../assets/css/theme.css?v=1">
 </head>
 
 <body>
@@ -363,6 +373,7 @@ $total_rows = mysqli_num_rows($list_ujian);
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/theme-toggle.js?v=1"></script>
 </body>
 
 </html>

@@ -54,11 +54,16 @@ $adminInisial = mb_strtoupper(mb_substr($adminNama, 0, 1));
     </a>
   </div>
 
-  <div class="admin-topbar-profile" title="<?= htmlspecialchars($adminNama) ?>">
-    <span class="admin-user-avatar">
-      <?= htmlspecialchars($adminInisial) ?>
-      <span class="status-indicator-dot"></span>
-    </span>
+  <div class="d-flex align-items-center gap-2">
+    <button type="button" class="theme-toggle theme-toggle-compact" data-theme-toggle aria-label="Beralih tema" title="Beralih tema">
+      <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+    </button>
+    <div class="admin-topbar-profile" title="<?= htmlspecialchars($adminNama) ?>">
+      <span class="admin-user-avatar">
+        <?= htmlspecialchars($adminInisial) ?>
+        <span class="status-indicator-dot"></span>
+      </span>
+    </div>
   </div>
 </header>
 
@@ -117,6 +122,10 @@ $adminInisial = mb_strtoupper(mb_substr($adminNama, 0, 1));
         <small><i class="bi bi-shield-check me-1 text-success"></i>Administrator</small>
       </div>
     </div>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Beralih tema" title="Beralih tema">
+      <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+      <span data-theme-label>Mode gelap</span>
+    </button>
     <button type="button" class="admin-logout-button" data-bs-toggle="modal" data-bs-target="#modalKonfirmasiLogout">
       <i class="bi bi-box-arrow-right"></i>
       <span>Keluar Sistem</span>
@@ -179,6 +188,10 @@ $adminInisial = mb_strtoupper(mb_substr($adminNama, 0, 1));
           <small><i class="bi bi-shield-check me-1 text-success"></i>Administrator</small>
         </div>
       </div>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Beralih tema" title="Beralih tema">
+        <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+        <span data-theme-label>Mode gelap</span>
+      </button>
       <button type="button" class="admin-logout-button" data-bs-toggle="modal" data-bs-target="#modalKonfirmasiLogout" data-bs-dismiss="offcanvas">
         <i class="bi bi-box-arrow-right"></i>
         <span>Keluar Sistem</span>

@@ -32,6 +32,15 @@ $isPassed = ($nilai >= 75);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('cbt-portal-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', document.documentElement.dataset.theme)
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.setAttribute('data-bs-theme', 'light')
+    }
+  </script>
   <title>Hasil Evaluasi - CBT Portal</title>
   <!-- Fonts & Bootstrap 5 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,9 +121,14 @@ $isPassed = ($nilai >= 75);
       border: 1px solid #fde68a;
     }
   </style>
+  <link rel="stylesheet" href="../assets/css/theme.css?v=1">
 </head>
 
-<body class="d-flex align-items-center justify-content-center py-5">
+<body class="student-page d-flex align-items-center justify-content-center py-5">
+
+  <button type="button" class="theme-toggle theme-toggle-compact theme-toggle-float" data-theme-toggle aria-label="Beralih tema" title="Beralih tema">
+    <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+  </button>
 
   <div class="container">
     <div class="row justify-content-center">
@@ -176,6 +190,7 @@ $isPassed = ($nilai >= 75);
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/theme-toggle.js?v=1"></script>
 </body>
 
 </html>

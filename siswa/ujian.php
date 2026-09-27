@@ -81,6 +81,15 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('cbt-portal-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', document.documentElement.dataset.theme)
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.setAttribute('data-bs-theme', 'light')
+    }
+  </script>
   <title>Lembar Evaluasi - <?= htmlspecialchars($sesi['judul_ujian']) ?></title>
   <!-- Fonts & Bootstrap 5 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -216,9 +225,10 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
       font-weight: 600;
     }
   </style>
+  <link rel="stylesheet" href="../assets/css/theme.css?v=1">
 </head>
 
-<body>
+<body class="student-page">
 
   <div class="container py-3 py-md-4">
 
@@ -239,6 +249,9 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
         </div>
 
         <div class="text-end d-flex align-items-center gap-3 ms-auto">
+          <button type="button" class="theme-toggle theme-toggle-compact theme-toggle-on-dark" data-theme-toggle aria-label="Beralih tema" title="Beralih tema">
+            <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+          </button>
           <div class="d-none d-md-block text-end">
             <small class="text-white-50 d-block" style="font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;">Sisa Waktu Ujian</small>
             <span class="badge bg-danger bg-opacity-25 text-danger-emphasis border border-danger border-opacity-25 px-2 py-0" style="font-size: 0.65rem;">Auto-Submit Aktif</span>
@@ -398,6 +411,7 @@ $total_soal_tampil = mysqli_num_rows($soal_list);
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/theme-toggle.js?v=1"></script>
 </body>
 
 </html>
